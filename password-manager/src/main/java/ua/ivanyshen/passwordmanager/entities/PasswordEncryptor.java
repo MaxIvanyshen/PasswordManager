@@ -43,17 +43,9 @@ public class PasswordEncryptor {
         return null;
     }
 
-    public String decrypt(final String encryptedText) {
-        try {
-            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
-            cipher.init(Cipher.DECRYPT_MODE, secretKey);
-            return new String(cipher.doFinal(Base64.getDecoder()
-                    .decode(encryptedText)));
-        } catch (Exception e) {
-            System.out.println("Error while decrypting: " + e.toString());
-        }
-        return null;
+
+    public boolean equal(String plainText, String encrypted) {
+        plainText = encrypt(plainText);
+        return plainText.equals(encrypted);
     }
-
-
 }

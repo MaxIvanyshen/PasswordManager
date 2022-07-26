@@ -12,9 +12,21 @@ import java.util.InvalidPropertiesFormatException;
 @Getter
 @Setter
 public class Password {
+
+    private String id;
     private String url;
     private String password;
     private ArrayList<String> notes;
+
+    public Password() {
+        this.id = IdGenerator.generate(10);
+    }
+
+    public Password(String url, String password) {
+        setUrl(url);
+        this.password = password;
+        this.id = IdGenerator.generate(10);
+    }
 
     @SneakyThrows
     public void setUrl(String url) {

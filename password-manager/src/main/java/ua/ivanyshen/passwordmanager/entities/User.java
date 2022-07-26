@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.SneakyThrows;
 
 import java.util.InvalidPropertiesFormatException;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,9 +15,21 @@ import java.util.regex.Pattern;
 @Setter
 public class User {
 
+    private String id;
     private String email;
     private String username;
     private String masterPassword;
+
+    public User() {
+        this.id = IdGenerator.generate(15);
+    }
+
+    public User(String email, String username, String masterPassword) {
+        this.id = IdGenerator.generate(15);
+        this.email = email;
+        this.username = username;
+        this.masterPassword = masterPassword;
+    }
 
     @SneakyThrows
     public void setEmail(String email) {

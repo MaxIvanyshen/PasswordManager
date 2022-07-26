@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
 import ua.ivanyshen.passwordmanager.entities.PasswordEncryptor;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PasswordEncryptorTest {
 
@@ -19,13 +19,16 @@ public class PasswordEncryptorTest {
     }
 
     @Test
-    public void testDecrypting() throws Exception {
+    public void testEquals_ShouldBeTrue() throws Exception {
         String hello = "hello";
-        String helloEncrypted = "oJIuq367QfU7eNc7/Tm6KQ==";
+        String encrypted = new PasswordEncryptor("s5v8y/B?E(H+MbQeShVmYq3t6w9z$C&F").encrypt(hello);
+        assertTrue(new PasswordEncryptor("s5v8y/B?E(H+MbQeShVmYq3t6w9z$C&F").equal("hello", encrypted));
+    }
 
-        PasswordEncryptor encryptor = new PasswordEncryptor("s5v8y/B?E(H+MbQeShVmYq3t6w9z$C&F");
-
-        assertEquals(hello, encryptor.decrypt(helloEncrypted));
-
+    @Test
+    public void testEquals_ShouldBeFalse() throws Exception {
+        String hello = "hello";
+        String encrypted = new PasswordEncryptor("s5v8y/B?E(H+MbQeShVmYq3t6w9z$C&F").encrypt(hello);
+        assertFalse(new PasswordEncryptor("s5v8y/B?E(H+MbQeShVmYq3t6w9z$C&F").equal("hlo", encrypted));
     }
 }
