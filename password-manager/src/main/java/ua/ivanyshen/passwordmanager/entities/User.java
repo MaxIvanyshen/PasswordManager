@@ -40,4 +40,15 @@ public class User {
         if(this.email == null)
             throw new InvalidPropertiesFormatException("Invalid Email");
     }
+
+    @Override
+    public boolean equals(Object o) {
+        User other = (User) o;
+        if(this.id.equals(other.getId()) &&
+                this.email.equals(other.getEmail()) &&
+                this.username.equals(other.getUsername()) &&
+                this.masterPassword.equals(other.getMasterPassword()))
+            return true;
+        return false;
+    }
 }

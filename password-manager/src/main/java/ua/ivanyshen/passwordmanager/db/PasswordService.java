@@ -7,9 +7,11 @@ public class PasswordService {
 
     private Repository<Password> repo;
 
-    public PasswordService() {
-        repo = new PasswordListRepository();
+    public PasswordService(Repository<Password> repo) {
+        this.repo = repo;
     }
+
+    public PasswordService() {repo = new PasswordListRepository();}
 
     public Password insert(Password p) {
         return repo.insert(p);

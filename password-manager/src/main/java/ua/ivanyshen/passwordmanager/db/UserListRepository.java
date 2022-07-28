@@ -2,6 +2,7 @@ package ua.ivanyshen.passwordmanager.db;
 
 import ua.ivanyshen.passwordmanager.entities.User;
 
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 
 public class UserListRepository implements Repository<User> {
@@ -14,8 +15,16 @@ public class UserListRepository implements Repository<User> {
 
     @Override
     public User insert(User element) {
-        list.add(element);
+        if(findById(element.getId()) == null)
+            list.add(element);
+        else {
+            for(int i = 0; i < list.size(); i++)
+                if(list.get(i).getId().equals(element.getId()))
+                    list.remove(i);
+            list.add(element);
+        }
         return element;
+
     }
 
     @Override
