@@ -8,14 +8,21 @@ import lombok.SneakyThrows;
 import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 
-@Data
-@Getter
-@Setter
 public class Password {
 
+    @Getter
     private String id;
+
+    @Getter
+    @Setter
     private String url;
+
+    @Getter
+    @Setter
     private String password;
+
+    @Getter
+    @Setter
     private ArrayList<String> notes;
 
     public Password() {

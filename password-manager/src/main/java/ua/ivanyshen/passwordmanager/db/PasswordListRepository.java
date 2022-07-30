@@ -14,7 +14,14 @@ public class PasswordListRepository implements Repository<Password>{
 
     @Override
     public Password insert(Password element) {
-        list.add(element);
+        if(findById(element.getId()) == null)
+            list.add(element);
+        else {
+            for(int i = 0; i < list.size(); i++)
+                if(list.get(i).getId().equals(element.getId()))
+                    list.remove(i);
+            list.add(element);
+        }
         return element;
     }
 

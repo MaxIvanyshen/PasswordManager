@@ -24,7 +24,7 @@ public class UserInteractor {
         repo.delete(id);
     }
 
-    public User editUser(String id, User user) {
+    public User updateUser(String id, User user) {
         User found = repo.findById(id);
         found.setUsername(user.getUsername());
         found.setEmail(user.getEmail());

@@ -37,10 +37,10 @@ public class UserInteractorTest {
     }
 
     @Test
-    public void testEditingUser() throws Exception {
+    public void testUpdatingUser() throws Exception {
         User u = new User("maxivanyshen@gmail.com", "Frozr", "nastya2016");
         interactor.createUser(u);
-        User edited = interactor.editUser(u.getId(), new User("umax2006@outlook.com", "Frozr", "nastya2016"));
+        User edited = interactor.updateUser(u.getId(), new User("umax2006@outlook.com", "Frozr", "nastya2016"));
         assertEquals(u.getId(), edited.getId());
         assertEquals(u.getUsername(), edited.getUsername());
         assertEquals(1, repo.size());
