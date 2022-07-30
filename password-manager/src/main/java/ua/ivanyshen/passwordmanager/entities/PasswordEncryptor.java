@@ -1,6 +1,7 @@
 package ua.ivanyshen.passwordmanager.entities;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
@@ -10,11 +11,12 @@ import java.security.*;
 import java.util.Arrays;
 import java.util.Base64;
 
+@Component
 public class PasswordEncryptor {
     private SecretKeySpec secretKey;
     private byte[] key;
 
-    public PasswordEncryptor(String key) {
+    public PasswordEncryptor(@Value("aes.key") String key) {
         setKey(key);
     }
 

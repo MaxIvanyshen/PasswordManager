@@ -1,9 +1,11 @@
 package ua.ivanyshen.passwordmanager.interactors;
 
+import org.springframework.stereotype.Component;
 import ua.ivanyshen.passwordmanager.db.Repository;
 import ua.ivanyshen.passwordmanager.entities.PasswordEncryptor;
 import ua.ivanyshen.passwordmanager.entities.User;
 
+@Component
 public class UserInteractor {
 
     private Repository<User> repo;
@@ -30,5 +32,9 @@ public class UserInteractor {
         found.setEmail(user.getEmail());
         found.setMasterPassword(user.getMasterPassword());
         return repo.insert(found);
+    }
+
+    public User find(String id) {
+        return repo.findById(id);
     }
 }

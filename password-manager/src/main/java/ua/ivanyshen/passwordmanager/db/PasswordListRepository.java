@@ -1,5 +1,7 @@
 package ua.ivanyshen.passwordmanager.db;
 
+import org.springframework.stereotype.Component;
+
 import ua.ivanyshen.passwordmanager.entities.Password;
 
 import java.util.ArrayList;
