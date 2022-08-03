@@ -1,14 +1,9 @@
 package ua.ivanyshen.passwordmanager.integrationTests;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.env.Environment;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
 import ua.ivanyshen.passwordmanager.controllers.UserController;
 import ua.ivanyshen.passwordmanager.db.UserListRepository;
@@ -17,7 +12,7 @@ import ua.ivanyshen.passwordmanager.entities.User;
 import ua.ivanyshen.passwordmanager.interactors.UserInteractor;
 
 @SpringJUnitConfig
-public class UserControllerTests {
+public class UserControllerTest {
     private WebTestClient client;
     private User u;
 

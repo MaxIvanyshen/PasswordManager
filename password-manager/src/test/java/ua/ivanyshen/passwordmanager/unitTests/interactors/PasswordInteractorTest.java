@@ -18,12 +18,11 @@ public class PasswordInteractorTest {
     @BeforeEach
     void setUp() {
         repo = new PasswordListRepository();
-        interactor = new PasswordInteractor(repo);
+        interactor = new PasswordInteractor(repo, new PasswordEncryptor("s5v8y/B?E(H+MbQeShVmYq3t6w9z$C&F"), new PasswordGenerator());
     }
 
     @Test
     public void testGeneratingPasswords() throws Exception {
-        interactor.setGenerator(new PasswordGenerator(15, false));
         String password = interactor.generatePassword();
         assertEquals(15, password.length());
         System.out.println(password);
@@ -33,7 +32,6 @@ public class PasswordInteractorTest {
 
     @Test
     public void testCreatingPassword_ShouldEncryptPassword() throws Exception {
-        interactor.setEncryptor(new PasswordEncryptor("s5v8y/B?E(H+MbQeShVmYq3t6w9z$C&F"));
         Password pw = new Password();
         String rawPassword = "password";
         pw.setPassword(rawPassword);
@@ -45,7 +43,6 @@ public class PasswordInteractorTest {
     
     @Test
     public void testUpdatingPassword() throws Exception {
-        interactor.setEncryptor(new PasswordEncryptor("s5v8y/B?E(H+MbQeShVmYq3t6w9z$C&F"));
         Password pw = new Password();
         String url = "https://www.google.com";
         pw.setPassword("password");

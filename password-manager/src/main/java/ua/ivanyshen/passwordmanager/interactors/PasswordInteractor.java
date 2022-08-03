@@ -1,47 +1,31 @@
 package ua.ivanyshen.passwordmanager.interactors;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.springframework.stereotype.Component;
+import ua.ivanyshen.passwordmanager.db.PasswordListRepository;
 import ua.ivanyshen.passwordmanager.db.Repository;
 import ua.ivanyshen.passwordmanager.entities.Password;
 import ua.ivanyshen.passwordmanager.entities.PasswordEncryptor;
 import ua.ivanyshen.passwordmanager.entities.PasswordGenerator;
+import ua.ivanyshen.passwordmanager.entities.User;
 
-@NoArgsConstructor
+@Component
 @AllArgsConstructor
 public class PasswordInteractor {
-
-    @Setter
     private Repository<Password> repo;
 
-    @Setter
     private PasswordEncryptor encryptor;
-    @Setter
+
     private PasswordGenerator generator;
-
-    public PasswordInteractor(Repository<Password> repo) {
-        this.repo = repo;
-    }
-
-    public PasswordInteractor(Repository<Password> repo, PasswordGenerator generator) {
-        this.repo = repo;
-        this.generator = generator;
-    }
-
-    public PasswordInteractor(Repository<Password> repo, PasswordEncryptor encryptor) {
-        this.repo = repo;
-        this.encryptor = encryptor;
-    }
-
-    public String generatePassword(int length, boolean specialChars) {
-        this.generator = new PasswordGenerator(length, specialChars);
-        return generatePassword();
-    }
 
     public String generatePassword() {
         return generator.generate();
+    }
+
+    public String generatePassword(int length, boolean specialChars) {
+        generator.setLength(length);
+        generator.setSpecialChars(specialChars);
+        return generatePassword();
     }
 
     public Password createPassword(Password pw) {
@@ -62,5 +46,13 @@ public class PasswordInteractor {
     private Password encryptPassword(Password pw) {
         pw.setPassword(encryptor.encrypt(pw.getPassword()));
         return pw;
+    }
+
+    public Password find(String id) {
+        return repo.findById(id);
+    }
+
+    public void deletePassword(String id) {
+        repo.delete(id);
     }
 }
