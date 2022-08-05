@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.*;
-import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;
 import java.security.*;
@@ -16,7 +15,7 @@ public class PasswordEncryptor {
     private SecretKeySpec secretKey;
     private byte[] key;
 
-    public PasswordEncryptor(@Value("aes.key") String key) {
+    public PasswordEncryptor(@Value("${aes.key}") String key) {
         setKey(key);
     }
 

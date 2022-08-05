@@ -3,21 +3,25 @@ package ua.ivanyshen.passwordmanager.unitTests.interactors;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ua.ivanyshen.passwordmanager.db.PasswordListRepository;
+import ua.ivanyshen.passwordmanager.db.PasswordMongoRepository;
 import ua.ivanyshen.passwordmanager.entities.Password;
 import ua.ivanyshen.passwordmanager.entities.PasswordEncryptor;
 import ua.ivanyshen.passwordmanager.entities.PasswordGenerator;
 import ua.ivanyshen.passwordmanager.interactors.PasswordInteractor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PasswordInteractorTest {
 
     private PasswordInteractor interactor;
-    private PasswordListRepository repo;
+    private PasswordMongoRepository repo;
 
     @BeforeEach
     void setUp() {
-        repo = new PasswordListRepository();
+        repo = new PasswordMongoRepository("mongodb://localhost:27017");
         interactor = new PasswordInteractor(repo, new PasswordEncryptor("s5v8y/B?E(H+MbQeShVmYq3t6w9z$C&F"), new PasswordGenerator());
     }
 
@@ -44,6 +48,7 @@ public class PasswordInteractorTest {
     @Test
     public void testUpdatingPassword() throws Exception {
         Password pw = new Password();
+        pw.setNotes(new ArrayList<>(List.of("my password")));
         String url = "https://www.google.com";
         pw.setPassword("password");
         pw.setUrl(url);

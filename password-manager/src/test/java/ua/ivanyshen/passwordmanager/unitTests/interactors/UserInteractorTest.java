@@ -1,8 +1,10 @@
 package ua.ivanyshen.passwordmanager.unitTests.interactors;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ua.ivanyshen.passwordmanager.db.UserListRepository;
+import ua.ivanyshen.passwordmanager.db.UserMongoRepository;
 import ua.ivanyshen.passwordmanager.entities.PasswordEncryptor;
 import ua.ivanyshen.passwordmanager.entities.User;
 import ua.ivanyshen.passwordmanager.interactors.UserInteractor;
@@ -11,12 +13,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserInteractorTest {
 
-    private UserListRepository repo;
+    private UserMongoRepository repo;
     private UserInteractor interactor;
 
     @BeforeEach
     void setUp() {
-        repo = new UserListRepository();
+        repo = new UserMongoRepository("mongodb://localhost:27017");
         interactor = new UserInteractor(repo, new PasswordEncryptor("s5v8y/B?E(H+MbQeShVmYq3t6w9z$C&F"));
     }
 

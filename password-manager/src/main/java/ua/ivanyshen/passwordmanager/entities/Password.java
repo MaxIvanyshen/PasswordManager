@@ -11,6 +11,7 @@ import java.util.InvalidPropertiesFormatException;
 public class Password {
 
     @Getter
+    @Setter
     private String id;
 
     @Getter

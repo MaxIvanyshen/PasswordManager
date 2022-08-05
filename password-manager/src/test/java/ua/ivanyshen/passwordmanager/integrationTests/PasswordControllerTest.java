@@ -7,6 +7,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 import ua.ivanyshen.passwordmanager.controllers.PasswordController;
 import ua.ivanyshen.passwordmanager.db.PasswordListRepository;
+import ua.ivanyshen.passwordmanager.db.PasswordMongoRepository;
 import ua.ivanyshen.passwordmanager.entities.Password;
 import ua.ivanyshen.passwordmanager.entities.PasswordEncryptor;
 import ua.ivanyshen.passwordmanager.entities.PasswordGenerator;
@@ -21,7 +22,7 @@ public class PasswordControllerTest {
 
     @BeforeEach
     void setUp() {
-        client = WebTestClient.bindToController(new PasswordController(new PasswordInteractor(new PasswordListRepository(), new PasswordEncryptor("s5v8y/B?E(H+MbQeShVmYq3t6w9z$C&F"), new PasswordGenerator())))
+        client = WebTestClient.bindToController(new PasswordController(new PasswordInteractor(new PasswordMongoRepository("mongodb://localhost:27017"), new PasswordEncryptor("s5v8y/B?E(H+MbQeShVmYq3t6w9z$C&F"), new PasswordGenerator())))
                 .configureClient()
                 .baseUrl("/api/v1/passwords")
                 .build();

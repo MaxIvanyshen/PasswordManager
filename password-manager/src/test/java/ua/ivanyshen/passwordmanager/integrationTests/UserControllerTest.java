@@ -7,6 +7,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 import ua.ivanyshen.passwordmanager.controllers.UserController;
 import ua.ivanyshen.passwordmanager.db.UserListRepository;
+import ua.ivanyshen.passwordmanager.db.UserMongoRepository;
 import ua.ivanyshen.passwordmanager.entities.PasswordEncryptor;
 import ua.ivanyshen.passwordmanager.entities.User;
 import ua.ivanyshen.passwordmanager.interactors.UserInteractor;
@@ -18,7 +19,7 @@ public class UserControllerTest {
 
     @BeforeEach
     void setUp() {
-        client = WebTestClient.bindToController(new UserController(new UserInteractor(new UserListRepository(), new PasswordEncryptor("s5v8y/B?E(H+MbQeShVmYq3t6w9z$C&F"))))
+        client = WebTestClient.bindToController(new UserController(new UserInteractor(new UserMongoRepository("mongodb://localhost:27017"), new PasswordEncryptor("s5v8y/B?E(H+MbQeShVmYq3t6w9z$C&F"))))
                 .configureClient()
                 .baseUrl("/api/v1/users")
                 .build();

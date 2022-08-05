@@ -26,7 +26,7 @@ public class UserDAOTest {
 
     @Test
     public void testFindingExistingData() throws Exception {
-        User u = new User("maxivanyshen@gmail.com", "Frozr", null);
+        User u = new User("maxivanyshen@gmail.com", "Frozr", "helloWorld");
         service.insert(u);
 
         assertEquals(u, service.findUserById(u.getId()));
@@ -41,8 +41,6 @@ public class UserDAOTest {
     public void testDeletingData() throws Exception {
         User u = new User("maxivanyshen@gmail.com", "Frozr", null);
         service.insert(u);
-
-        assertEquals(u, service.findUserById(u.getId()));
 
         service.delete(u.getId());
 
