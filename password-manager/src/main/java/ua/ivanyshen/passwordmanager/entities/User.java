@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
 
+import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -20,8 +21,11 @@ public class User {
     private String username;
     private String masterPassword;
 
+    private ArrayList<String> passwordsList;
+
     public User() {
         this.id = IdGenerator.generate(15);
+        passwordsList = new ArrayList<>();
     }
 
     public User(String email, String username, String masterPassword) {
@@ -29,6 +33,7 @@ public class User {
         this.email = email;
         this.username = username;
         this.masterPassword = masterPassword;
+        passwordsList = new ArrayList<>();
     }
 
     @SneakyThrows

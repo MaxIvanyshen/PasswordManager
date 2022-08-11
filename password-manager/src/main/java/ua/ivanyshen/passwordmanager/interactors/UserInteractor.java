@@ -5,6 +5,8 @@ import ua.ivanyshen.passwordmanager.db.Repository;
 import ua.ivanyshen.passwordmanager.entities.PasswordEncryptor;
 import ua.ivanyshen.passwordmanager.entities.User;
 
+import java.util.ArrayList;
+
 @Component
 public class UserInteractor {
 
@@ -31,10 +33,18 @@ public class UserInteractor {
         found.setUsername(user.getUsername());
         found.setEmail(user.getEmail());
         found.setMasterPassword(user.getMasterPassword());
+        found.setPasswordsList(user.getPasswordsList());
         return repo.insert(found);
     }
 
     public User find(String id) {
         return repo.findById(id);
+    }
+
+    public ArrayList<String> addUserPassword(String userId, String passwordId) {
+        User found = find(userId);
+        found.getPasswordsList().add(passwordId);
+        updateUser(userId, found);
+        return found.getPasswordsList();
     }
 }

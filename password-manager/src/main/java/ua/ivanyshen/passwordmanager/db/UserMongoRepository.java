@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import ua.ivanyshen.passwordmanager.entities.User;
 
+import java.util.ArrayList;
+
 public class UserMongoRepository implements Repository<User> {
 
     private MongoCollection<Document> usersCollection;
@@ -49,6 +51,7 @@ public class UserMongoRepository implements Repository<User> {
             found.setMasterPassword(element.getMasterPassword());
             found.setEmail(element.getEmail());
             found.setUsername(element.getUsername());
+            found.setPasswordsList(element.getPasswordsList());
             delete(found.getId());
             save(found);
             return found;
@@ -62,7 +65,8 @@ public class UserMongoRepository implements Repository<User> {
         Document userDoc = new Document("_id", u.getId())
                 .append("email", u.getEmail())
                 .append("username", u.getUsername())
-                .append("masterPassword", u.getMasterPassword());
+                .append("masterPassword", u.getMasterPassword())
+                .append("passwordList", u.getPasswordsList());
         usersCollection.insertOne(userDoc);
     }
 
@@ -86,6 +90,7 @@ public class UserMongoRepository implements Repository<User> {
         if(found == null) return null;
         User u = new User((String) found.get("email"), (String) found.get("username"), (String) found.get("masterPassword"));
         u.setId(id);
+        u.setPasswordsList((ArrayList<String>) found.get("passwordList"));
         return u;
     }
 }

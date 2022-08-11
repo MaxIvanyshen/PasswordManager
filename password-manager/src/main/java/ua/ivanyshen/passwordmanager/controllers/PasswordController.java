@@ -32,10 +32,10 @@ public class PasswordController {
         return interactor.createPassword(pw);
     }
 
-    @GetMapping(value = "/{id}",
+    @GetMapping(value = "/{pwId}",
             produces = "application/json")
-    public Password getPassword(@PathVariable String id) {
-        return interactor.find(id);
+    public Password getPassword(@PathVariable String pwId) {
+        return interactor.find(pwId);
     }
 
     @DeleteMapping("/{id}")

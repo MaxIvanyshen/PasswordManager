@@ -81,4 +81,30 @@ public class UserControllerTest {
                 .jsonPath("username").isEqualTo("Frozr617")
                 .jsonPath("id").isEqualTo(u.getId());
     }
+
+    @Test
+    public void testGettingUserPasswords() throws Exception {
+        createUser();
+        client.get().uri("/" + u.getId() + "/passwords")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody()
+                .json("[]");
+    }
+
+    @Test
+    public void testAddingValidPasswordToUser() throws Exception {
+        createUser();
+        client.post().uri("/" + u.getId() + "/passwords/" + "3AUpIhfiRT")
+                .exchange()
+                .expectStatus().isOk();
+    }
+
+    @Test
+    public void testAddingInvalidPasswordToUser() throws Exception {
+        createUser();
+        client.post().uri("/" + u.getId() + "/passwords/" + "3AUpashfiRT")
+                .exchange()
+                .expectStatus().isNoContent();
+    }
 }
